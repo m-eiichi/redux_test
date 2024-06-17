@@ -1,10 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
-import { counterActions } from "../../ducks/counter/slises";
-import {RootState} from "../../ducks/store";
+import { counterActions } from "@/ducks/counter/slises";
+import {RootState} from "@/ducks/store";
+import { ToggleSwitch } from "@/component/toggle_switch";
+import Styles from "./counter.module.css"
 
 export const Counter = () => {
   const counter = useSelector((state:RootState) => state.counter.counter);
   const show = useSelector((state:RootState) => state.counter.showNum);
+  const login = useSelector((state:RootState) => state.auth.isAuth);
   const dispatch = useDispatch();
 
   const incrementHandler = () => {
@@ -13,14 +16,16 @@ export const Counter = () => {
   const decrementHandler = () => {
     dispatch(counterActions.decrement());
   };
+
   const increaseHandler = () => {
     dispatch(counterActions.increase(5));
   };
+
   const toggleHandler = () => {
     dispatch(counterActions.toggleCounter());
   };
   return (
-    <div>
+    <div className={Styles.container}>
       {show && <h1>{counter}</h1>}
       <div className="counter-btn">
         <button className="btn" onClick={incrementHandler}>
@@ -33,9 +38,10 @@ export const Counter = () => {
           -1
         </button>
       </div>
-      <button className="btn" onClick={toggleHandler}>
-        表示/非表示
-      </button>
+
+      <div className={Styles.toggle_switch_container}>
+        <p>表示/非表示</p><ToggleSwitch size="m" disabled={!login} checked={show} onClick={toggleHandler}/>
+      </div>
     </div>
   );
 };
