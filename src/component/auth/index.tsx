@@ -1,8 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "../../reducks/auth/slises";
+import { authActions } from "../../ducks/auth/slises";
+import {RootState} from "../../ducks/store";
 
 export const Auth = () => {
-  const isAuth = useSelector((state) => state.auth.isAuth);
+  const isAuth = useSelector((state:RootState) => state.auth.isAuth);
   const dispatch = useDispatch();
 
   const loginHandler = () => {

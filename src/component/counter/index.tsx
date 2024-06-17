@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
-
-import { counterActions } from "../../reducks/counter/slises";
+import { counterActions } from "../../ducks/counter/slises";
+import {RootState} from "../../ducks/store";
 
 export const Counter = () => {
-  const counter = useSelector((state) => state.counter.counter);
-  const show = useSelector((state) => state.counter.showNum);
+  const counter = useSelector((state:RootState) => state.counter.counter);
+  const show = useSelector((state:RootState) => state.counter.showNum);
   const dispatch = useDispatch();
 
   const incrementHandler = () => {
